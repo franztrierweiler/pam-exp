@@ -29,3 +29,5 @@ source $VENV_NAME/bin/activate
 
 # Installer dans l'environnement virtuel les différents paquetages Pyhthon
 pip install mistralai
+pip install ollama
+pip install pdf2image
