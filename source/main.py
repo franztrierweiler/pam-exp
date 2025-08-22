@@ -9,23 +9,47 @@
 
 from mistralai import Mistral
 import os
+import curses
 
-api_key = "eWvlh2Yoke60YJajF2iLGUXFoEjBnX9E"
-model = "mistral-small-latest"
+def display_menu(stdscr):
+    
+    curses.curs_set(0)
+    curses.use_default_colors()
 
-client = Mistral(api_key=api_key)
+    # Liste des options du menu
+    menu_items = ["Test d'un LLM local", "Lecture de fichiers", "---", "---", "---"]
+    current_row = 0
 
-def start():
-    lechat_response = client.chat.complete(
-        model = model,
-        messages = [{
-            "role":"user",
-            "content":"Calcule l'intégrale de 0 à 100 de la fonction x^2"
-            }]
-    )
+    while True:
+        stdscr.clear()
+        # Afficher le menu
+        stdscr.addstr(0, 2, "- Menu principal")
+        for idx, item in enumerate(menu_items):
+            if idx == current_row:
+                # Mettre en surbrillance l'élément sélectionné
+                stdscr.attron(curses.A_REVERSE)
+                stdscr.addstr(idx + 1, 2, item)
+                stdscr.attroff(curses.A_REVERSE)
+            else:
+                stdscr.addstr(idx + 1, 2, item)
 
-    print(lechat_response.choices[0].message.content)
+        # Rafraîchir l'écran
+        stdscr.refresh()
 
+        # Attendre une entrée utilisateur
+        key = stdscr.getch()
+
+        # Gestion des touches fléchées
+        if key == curses.KEY_UP and current_row > 0:
+            current_row -= 1
+        elif key == curses.KEY_DOWN and current_row < len(menu_items) - 1:
+            current_row += 1
+        elif key == curses.KEY_ENTER or key in [10, 13]:
+            return current_row
+
+    # Restaurer les paramètres du terminal
+    stdscr.keypad(False)
+    curses.curs_set(1)
 
 if __name__ == '__main__':
-    start()
+    print(curses.wrapper(display_menu))
