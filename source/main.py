@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # La ligne ci-dessus permet de lancer le script Python sur un système UNIX
 # Ne pas oublier de changer les droits d'exécution du fichier par un chmod (ex: chmod 777)
@@ -11,7 +11,7 @@ from mistralai import Mistral
 import os
 
 api_key = "eWvlh2Yoke60YJajF2iLGUXFoEjBnX9E"
-model = "mistral-large-latest"
+model = "mistral-small-latest"
 
 client = Mistral(api_key=api_key)
 
