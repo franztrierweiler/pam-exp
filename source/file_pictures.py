@@ -6,7 +6,7 @@ from tqdm import tqdm
 INPUT_DIR = "input_pdf_files"
 OUTPUT_DIR = "output_image"
 
-def turn_pdf_into_pictures():
+def task_turn_pdf_into_pictures():
 
     # Créer le répertoire de sortie s'il n'existe pas
     os.makedirs(output_dir, exist_ok=True)
