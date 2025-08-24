@@ -23,7 +23,7 @@ def display_menu(stdscr):
     while True:
         stdscr.clear()
         # Afficher le menu
-        stdscr.addstr(0, 2, "- Menu principal")
+        stdscr.addstr(0, 2, "- OIA Menu principal")
         for idx, item in enumerate(menu_items):
             if idx == current_row:
                 # Mettre en surbrillance l'élément sélectionné
